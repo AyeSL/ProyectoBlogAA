@@ -1,0 +1,44 @@
+{% extends 'componentes/padre.html' %}
+{% load static %}
+
+<!--======================== SECCIÓN LISTAR CATEGORIAS ===================================-->
+<!-------------Se muestra una tabla con todo las categorias del blog------------------------>
+
+{% block contenido %}
+<h2>LISTADO DE CATEGORIAS</h2>
+<a class="btn btn-primary text-white btn-sm" href="{% url 'categoria_create' %}" role="button" style="margin:3px; width:100%;"> 👉 Crear nueva categoria 👈</a>
+<hr>
+
+{% if object_list %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">DESCRIPCION</th>
+    </thead>
+    <tbody>
+
+        {% for categoria in object_list %}
+        <tr class="table-active">
+            <th scope="row">{{categoria.nombre | striptags }}</th>
+            <td>{{categoria.descripcion | striptags }}</td>
+            <td>
+                
+               <a class="btn btn-success btn-sm" href="{% url 'categoria_update' categoria.id %}" role="button"
+                    style="margin:3px; width:100%;">Editar</a>
+
+               <a class="btn btn-danger btn-sm" href="{% url 'categoria_delete' categoria.id %}" role="button"
+                    style="margin:3px; width:100%">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2 class="lead">Ouchh....No hay categorias cargadas!!😬</h2>
+<p>Contanos alguna novedad sobre el mundo IT <br> <a type="button" class="btn btn-info mt-3" href="#">Crear nueva
+    categoria!!</a></p>
+{% endif %}
+
+{% endblock %}

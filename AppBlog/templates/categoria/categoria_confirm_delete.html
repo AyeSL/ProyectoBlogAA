@@ -1,0 +1,22 @@
+{% extends 'componentes/padre.html' %}
+{% load static %}
+
+{% block contenido %}
+<h2>ELIMINAR CATEGORIA</h2>
+<hr>
+<form method="POST">
+    {% csrf_token %}
+    <div class="card mb-3 border border-danger border-2 rounded-3">
+        <h3 class="card-header text-danger text-center">🚨 ¡¡Estas por eliminar una categoria!! 🚨</h3>
+        <div class="card-body">
+            <h5 class="card-title "><b>Nombre:</b>{{object.nombre}}</h5>
+            <h5 class="card-title "><b>Descripcion:</b>{{object.descripcion}}</h5>
+            <ul class="list-group list-group-flush">
+            </ul>  
+        </div>
+    </div>
+    <a class="btn btn-success " href="{% url 'categoria_list' %}" role="button"
+        style="margin:0 10% 0 15%; width: 30%;">Cancelar</a>
+    <button class="btn btn-danger " type="submit" style="width: 30%;">ELIMINAR</button>
+</form>
+{% endblock %}

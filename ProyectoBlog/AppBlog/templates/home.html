@@ -1,0 +1,40 @@
+{% extends 'componentes/padre.html' %}
+{% load static %}
+<!--========================== SECCIÓN HOME =========================-->
+
+{% block contenido %}
+<div class="row my-4 text-center">
+    <h3 class="display-6"> PUBLICACIONES </h3>  
+    <hr>
+
+    <form action="/posts/post_search"  method="GET">
+        {% csrf_token %}
+        <h2 class="display-6">Buscar por id</h2>
+        <input type="number" name="id" id="id">
+        <input type="submit" value="Buscar">
+     </form> 
+
+     {% if object_list %}
+        {% for post in object_list %}
+        <div class="col-md-4 p-4">
+            <div class="card border-info mb-3">
+                    <span class="badge bg-info">{{post.categoria | upper}}</span>
+                    <div class="card-body">
+                        <h4 class="card-title">{{post.titulo}}</h4>
+                        <p class="card-text lead ">{{post.descripcion | striptags | truncatechars:50}}</p>
+                        <a href="{% url 'post_detail' post.id %}" type="button" class="btn btn-link"">Seguir Leyendo</a>
+                    </div>
+                    <div class=" card-footer" style="font-size:15px">
+                        <h6>Por: <b>{{post.autor}}</b> - <small> {{post.fecha_creacion}}</small></h6>
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+        <h2 class="lead">Ouchh....No hay post cargados!!😬</h2>
+        <p>Contanos alguna novedad sobre el mundo IT <br><br> <a type="button" class="btn btn-info" href="{% url 'post_create' %}">Crear nuevo post!!</a></p>
+        
+    {% endif %}
+</div>
+{% endblock %}

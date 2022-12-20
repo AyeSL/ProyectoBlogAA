@@ -1,0 +1,24 @@
+{% extends 'componentes/padre.html' %}
+
+{% block contenido %}
+<h2>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'home' %}" role="button">👈Volver</a>
+    PUBLICACIÓN
+</h2>
+<hr>
+<div class="card mb-3">
+    <span class="badge bg-info">{{post.categoria | upper}}</span>
+    <div class="card-body">
+            <h4 class="lead text-end text-muted " style="margin-left:50%">🗓{{object.fecha_creacion | date}}</h4>
+            <h3 class="card-title">{{object.titulo}} </h3>
+            <h5 class="card-subtitle text-muted">{{object.subtitulo}}</h5>
+    </div>
+    <div class="card-body">
+        <p>{{object.descripcion}}</p>
+        <p class="card-text" style="font-size:20px">{{object.contenido}}</p>
+    </div>
+    <div class="card-footer text-end lead">
+        <p>Por <I>{{object.autor}}</I></p>
+    </div>
+</div>
+{% endblock %}

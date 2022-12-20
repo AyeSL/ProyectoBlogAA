@@ -1,0 +1,16 @@
+{% extends 'componentes/padre.html' %}
+
+{% block contenido %}
+<!--bs5-jumbotron-->
+<div class="p-5 bg-dark" style="color:rgb(235, 225, 214); border-radius: 15px;">
+    <div class="container">
+        <h1 class="display-3">¡¡Hola te damos la bienvenida!!</h1>
+        <h2 class="display-6">👋😎Somos Aye y Ara</h2>
+        <p class="lead" style="font-size:25px">¿Te gustaría conocer nuestro blog?</p>
+        <hr class="my-2">
+        <p class="lead">
+            <a class="btn btn-warning btn-lg" href="{% url 'home' %}" role="button">Empezar</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

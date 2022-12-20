@@ -1,0 +1,59 @@
+{% extends 'componentes/padre.html' %}
+{% load static %}
+
+<!--======================== SECCIÓN LISTAR POST ===================================-->
+<!-------------Se muestra una tabla con todo los post del blog------------------------>
+
+{% block contenido %}
+<h2>LISTADO DE POSTS</h2>
+<a class="btn btn-primary text-white btn-sm" href="{% url 'post_create' %}" role="button" style="margin:3px; width:100%;"> 👉 Crear nuevo post 👈</a>
+<hr>
+
+{% if object_list %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">TITULO</th>
+            <th scope="col">SUBTITULO</th>
+            <th scope="col">DESCRIPCIÓN</th>
+            <th scope="col">CONTENIDO</th>
+            <th scope="col">AUTOR</th>
+            <th scope="col">FECHA</th>
+            <th scope="col">CATEGORÍA</th>
+            <th scope="col">ACCIÓN</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for post in object_list %}
+        <tr class="table-active">
+            <th scope="row">{{post.titulo | striptags | truncatechars:50}}</th>
+            <td>{{post.subtitulo | striptags | truncatechars:50}}</td>
+            <td>{{post.descripcion | striptags | truncatechars:50}}</td>
+            <td>{{post.contenido | striptags | truncatechars:50}}</td>
+            <td>{{post.autor}}</td>
+            <td>{{post.fecha | date:'d/m/Y'}}</td>
+            <td>{{post.categoria}}</td>
+            <td>
+
+                <a class="btn btn-info text-white btn-sm" href="{% url 'post_detail' post.id %}" role="button"
+                style="margin:3px; width:100%;">Ver</a>
+
+                <a class="btn btn-success btn-sm" href="{% url 'post_update' post.id %}" role="button"
+                    style="margin:3px; width:100%;">Editar</a>
+
+                <a class="btn btn-danger btn-sm" href="{% url 'post_delete' post.id %}" role="button"
+                    style="margin:3px; width:100%">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2 class="lead">Ouchh....No hay post cargados!!😬</h2>
+<p>Contanos alguna novedad sobre el mundo IT <br> <a type="button" class="btn btn-info mt-3" href="{% url 'post_create' %}">Crear nuevo
+        post!!</a></p>
+{% endif %}
+
+{% endblock %}

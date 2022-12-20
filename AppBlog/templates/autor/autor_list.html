@@ -1,0 +1,49 @@
+{% extends 'componentes/padre.html' %}
+{% load static %}
+
+<!--======================== SECCIÓN LISTAR AUTORES ===================================-->
+<!-------------Se muestra una tabla con todo los autores del blog------------------------>
+
+{% block contenido %}
+<h2>LISTADO DE AUTORES</h2>
+<a class="btn btn-primary text-white btn-sm" href="{% url 'autor_create' %}" role="button" style="margin:3px; width:100%;"> 👉 Crear nuevo autor 👈</a>
+<hr>
+
+{% if object_list %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">APELLIDO</th>
+            <th scope="col">FECHA DE NACIMIENTO</th>
+            <th scope="col">NACIONALIDAD</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for autor in object_list %}
+        <tr class="table-active">
+            <th scope="row">{{autor.nombre | striptags }}</th>
+            <td>{{autor.apellido | striptags }}</td>
+            <td>{{autor.fecha_nacimiento | striptags }}</td>
+            <td>{{autor.nacionalidad | striptags }}</td>
+            <td>
+                
+                <a class="btn btn-success btn-sm" href="{% url 'autor_update' autor.id %}" role="button"
+                    style="margin:3px; width:100%;">Editar</a>
+
+                <a class="btn btn-danger btn-sm" href="{% url 'autor_delete' autor.id %}" role="button"
+                    style="margin:3px; width:100%">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2 class="lead">Ouchh....No hay autores cargados!!😬</h2>
+<p>Contanos alguna novedad sobre el mundo IT <br> <a type="button" class="btn btn-info mt-3" href="#">Crear nuevo
+        autor!!</a></p>
+{% endif %}
+
+{% endblock %}
